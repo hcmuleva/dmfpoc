@@ -1,25 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-deployment
+  name: myapp
 spec:
   selector:
     matchLabels:
       app: myapp
   replicas: 2
-  template: 
+  template:
     metadata:
-      labels: 
+      labels:
         app: myapp
     spec:
       containers:
       - name: myapp
-        image: hcmuleva/strapi:latest
-  ports:
-  - port: 8080
-    protocol: TCP
-    targetPort: 8080
-
-
-
-
+        image: nanajanashia/argocd-app:1.2
+        ports:
+        - containerPort: 8080
