@@ -1,1 +1,0 @@
-print("Demo Version 1.0")

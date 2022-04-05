@@ -1,0 +1,8 @@
+pymongo
+pyjwt[crypto]
+Flask
+flask_bcrypt
+cryptography
+flask_cors
+flask_pymongo
+Werkzeug~=2.0.0
