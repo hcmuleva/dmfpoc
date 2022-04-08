@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mockserver-deployment
+spec:
+  replicas: {{.Values.replicaCount}}
+  selector:
+    matchLabels:
+      component: mockserver
+  template:
+    metadata:
+      labels:
+        component: mockserver
+    spec:
+      containers:
+        - name: server
+          image: hcmuleva/mockapi:1.3
+          ports:
+            - containerPort: 8085
+          env:      
+            - name: MONGODB_DATABASE
+              value: dmfdb
+            - name: MONGO_URL
+              value: mongodb://MONGODB_USERNAME_DUMMY:MONGOPASSROD_DUMMY@localhost:27017
+            - name: MONGODB_USERNAME
+              value: dmfuser
+            - name: MONGODB_PORT
+              value: "27017"
+            - name: MONGODB_PASSWORD
+              value: dmfpassword
+            - name: MONGODB_HOSTNAME
+              value: mongodb
+            - name: REDIS_HOSTNAME
+              value: redis
+            - name: PGUSER
+              value: postgres
+            - name: PGHOST
+              value: postgres-cluster-ip-service
+            - name: PGPORT
+              value: "5432"
+            - name: PGDATABASE
+              value: postgres
+            - name: PGPASSWORD
+              value: 12345test

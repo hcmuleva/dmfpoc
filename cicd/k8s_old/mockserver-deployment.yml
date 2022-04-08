@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mockserver-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mockserver
+  template:
+    metadata:
+      labels:
+        component: mockserver
+    spec:
+      containers:
+        - name: server
+          image: hcmuleva/mockapi:latest
+          ports:
+            - containerPort: 8085
+          env:      
+            - name: MONGODB_DATABASE
+              value: dmfdb
+            - name: MONGODB_USERNAME
+              value: dmfuser
+            - name: MONGODB_PASSWORD
+              value: dmfpassword
+            - name: MONGODB_HOSTNAME
+              value: mongo-cluster-ip-service
+            

@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  mockserver:
+    image: hcmuleva/mockapi
+    ports:
+      - "8085:8085"
+    depends_on: 
+            - mongodb
+    links:
+      - mongodb   
+    environment: 
+      MONGODB_DATABASE: dmfdb
+      MONGODB_USERNAME: dmfuser
+      MONGODB_PASSWORD: dmfpassword
+      MONGODB_HOSTNAME: mongodb     
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017" 
+    volumes:
+      - './mockdata/data:/data/db'
+      - ./docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    environment: 
+      MONGO_INITDB_ROOT_USERNAME: mongoadmin
+      MONGO_INITDB_ROOT_PASSWORD: secret
+volumes:
+    dockerdata:
