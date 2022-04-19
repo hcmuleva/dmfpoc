@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mockserver-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mockserver
+  template:
+    metadata:
+      labels:
+        component: mockserver
+    spec:
+      containers:
+        - name: server
+          image: strapi/strapi
+          ports:
+            - containerPort: 1337
+          env:      
+            - name: DATABASE_HOST
+              value: "20.236.38.187"
+            - name: DATABASE_PORT
+              value: "27017"
+            - name: DATABASE_NAME
+              value: strapi
+            - name: DATABASE_CLIENT
+              value: mongo
+            - name: DATABASE_USERNAME
+              value: mongoadmin
+            - name: DATABASE_PASSWORD
+              value: secret
